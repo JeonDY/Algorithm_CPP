@@ -16,7 +16,7 @@ int cntYellow;
 
 void init();
 void initRG();
-int chooseRG();
+int chooseG();
 
 int main(){
     init();
@@ -45,7 +45,8 @@ void initRG(){
 }
 
 bool chooseRG(){
-    //Choose 
+    //choose red
+    while()
 }
 
 void init(){
