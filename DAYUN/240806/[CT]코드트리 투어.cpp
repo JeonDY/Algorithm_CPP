@@ -14,11 +14,17 @@ using namespace std;
 
 #define MAX_W 2000010
 
+struct GOAT {
+    int GOAT_COST;
+    int GOAT_DIRECTION;
+} GOAT[100][100][100][100][100];
+
 int n;
 int m;
 int dist[2010];
 int graph[2010][2010];
 priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> path;
+priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> trips;
 
 void init(int n, int m)
 {
@@ -27,27 +33,42 @@ void init(int n, int m)
     for(int i = 0; i < m; ++i) {
         cin >> v1 >> v2 >> w;
         graph[v1][v2] = w < graph[v1][v2] ? w : graph[v1][v2];
+        graph[v2][v1] = w < graph[v2][v1] ? w : graph[v2][v1];
     }
 }
-
-void make_trip(int id, int revenud, int dest)
-{}
 
 void change_start(int s)
 {
     fill(&dist[0], &dist[n], MAX_W);
     while(!path.empty()) path.pop();
 
-    path.push({0, 0});
+    path.push({0, s});
+    dist[s] = 0;
 
     while(!path.empty()) {
-        
+        int node = path.top().second;
+        int weight = path.top().first;
+
+        for(int i = 0; i < n; ++i) {
+            if(dist[i] <= (weight + graph[node][i])) continue;
+            dist[i] = weight + graph[node][i];
+            path.push({dist[i], i});
+        }
     }
 
+    
 }
 
+void make_trip(int id, int revenue, int dest)
+{
+    
+}
+
+
 void cancel_trip(int id)
-{}
+{
+
+}
 
 int best_trip()
 {return 0;}
